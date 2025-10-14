@@ -1,143 +1,536 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <title>Venkatesh Kardile — Data Analyst Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Data Analyst portfolio — Power BI, Python, SQL, R, DAX, FastAPI. Advanced animations and premium UI." />
+    <link rel="icon" href="images/favicon.png" />
+    <meta property="og:title" content="Venkatesh Kardile — Portfolio" />
+    <meta property="og:description" content="Dashboards, ML projects, and interactive demos." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="images/Weather.jpg" />
+    <meta property="og:url" content="https://venkateshkardile.com" />
+    
+    <style>
+        /* =========================
+           Design Tokens
+        ========================= */
+        :root{
+            --transition-time: .35s;
+            --font-family: 'Inter', sans-serif;
+            --focus: #ffc86b;
+            --modal-bg: rgba(0,0,0,0.85);
+        }
+        :root[data-theme='dark']{
+            --bg: #0b0d12;
+            --surface: #0f121a;
+            --text: #eef1f7;
+            --muted: #b8bed2;
+            --heading: #fff;
+            --accent: #7aa2ff;
+            --accent2: #b07cff;
+            --glass: rgba(255,255,255,.06);
+            --glass-border: rgba(255,255,255,.14);
+            --shadow-1: 0 10px 30px rgba(0,0,0,.45);
+            --shadow-2: 0 30px 80px rgba(0,0,0,.45);
+            --grid1: rgba(255,255,255,.05);
+            --grid2: rgba(255,255,255,.02);
+            --modal-content-bg: #1a1e27;
+        }
+        :root[data-theme='light']{
+            --bg: #fbfcff;
+            --surface: #ffffff;
+            --text: #131720;
+            --muted: #4d5367;
+            --heading: #0b0e14;
+            --accent: #4f6dff;
+            --accent2: #8a5cff;
+            --glass: rgba(10,15,30,.06);
+            --glass-border: rgba(10,15,30,.10);
+            --shadow-1: 0 10px 30px rgba(28,45,128,.12);
+            --shadow-2: 0 30px 80px rgba(28,45,128,.18);
+            --grid1: rgba(16,24,40,.06);
+            --grid2: rgba(16,24,40,.02);
+            --modal-content-bg: #ffffff;
+        }
 
-<html>
-	<head>
-		<title>Projects by Venkatesh</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+        /* Base */
+        html,body{height:100%}
+        body{
+            background: var(--bg);
+            color: var(--text);
+            transition: background var(--transition-time) ease,color var(--transition-time) ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            font-family: var(--font-family);
+            background-color: var(--bg);
+            background-image: radial-gradient(40vw 40vw at 15% 20%, color-mix(in oklab, var(--accent) 15%, transparent) 0%, transparent 60%),
+                              radial-gradient(50vw 50vw at 85% 20%, color-mix(in oklab, var(--accent2) 15%, transparent) 0%, transparent 60%),
+                              radial-gradient(60vw 60vw at 50% 110%, color-mix(in oklab, #00d3ff 8%, transparent) 0%, transparent 60%);
+        }
+        h1,h2,h3,h4,h5,h6{color:var(--heading)}
+        a{color:inherit;text-decoration:none}
+        a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
 
-		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
+        /* Profile Photo Style */
+        .profile-photo {
+            width: 140px; 
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--accent); 
+            box-shadow: var(--shadow-1);
+            filter: grayscale(10%); 
+            cursor: pointer; /* Added pointer to indicate clickability */
+            transition: transform 0.2s ease;
+        }
+        .profile-photo:hover {
+            transform: scale(1.05);
+        }
 
-				<!-- Intro -->
-					<div id="intro">
-                 <h1>Venkatesh Kardile Portfolio</h1>
-                 <p>
-                   Data Analyst skilled in SQL, Tableau, PowerBI and Python
-                 <a href="https://www.linkedin.com/in/venkateshak1" target="_blank" rel="noopener">@Venkatesh</a>
-                 </p>
+        /* Background systems: grid & animation */
+        @keyframes movingGradient {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .bg-wrap{position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none;}
+        .bg-grid{
+            position:absolute; inset:0; background:
+                linear-gradient(transparent 96%, var(--grid1) 0) 0 0 / 40px 40px,
+                linear-gradient(90deg, transparent 96%, var(--grid1) 0) 0 0 / 40px 40px,
+                radial-gradient(600px 600px at 50% 10%, var(--grid2), transparent 60%);
+            mask-image: radial-gradient(80% 60% at 50% 20%, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(80% 60% at 50% 20%, black, transparent 80%);
+        }
+        .bg-gradient{animation: movingGradient 30s ease-in-out infinite;}
 
-                 <ul class="actions">
-                 <li>
-                 <a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a>
-                  </li>
-                 </ul>
-                 </div>
+        /* Sticky header */
+        .site-header{
+            position: sticky; top:0; z-index:50; padding: 18px 16px;
+            backdrop-filter: blur(10px) saturate(130%);
+            background: color-mix(in oklab, var(--glass) 75%, transparent);
+            border-bottom: 1px solid var(--glass-border);
+            transition: padding .25s ease, background .25s ease, border-color .25s ease;
+        }
+        .site-header.compact{ padding: 8px 16px; background: color-mix(in oklab, var(--glass) 90%, transparent); }
+        .nav{ max-width: 1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+        .brand{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:.2px}
+        .brand-mark{width:12px;height:12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 0 6px color-mix(in oklab, var(--accent) 20%, transparent)}
+        .nav-links{display:flex;align-items:center;gap:1rem; color:var(--muted); font-weight:700}
+        .nav-links a:hover{color:var(--heading)}
 
-				 <!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Projects</a>
-					</header>
+        /* Hero */
+        .hero{
+            position: relative; max-width: 1200px; margin: 0 auto; padding: 90px 20px 30px; text-align:center;
+        }
+        .hero .layer{
+            position:absolute; inset: -10% -10%; z-index: -1;
+            background: radial-gradient(30vw 30vw at 60% 10%, color-mix(in oklab, var(--accent) 20%, transparent), transparent 60%);
+            transform: translateZ(0);
+        }
+        .hero h1{font-size: clamp(2.3rem, 4vw, 3.2rem); margin: 0 0 .4rem}
+        .hero p.lead{font-size: clamp(1rem, 1.8vw, 1.15rem); color: var(--muted); max-width: 900px; margin: 0 auto 1.2rem}
+        .cta{display:inline-flex; gap:.9rem; flex-wrap:wrap; justify-content:center; margin-top: .8rem}
 
-				 <!-- Nav -->
-					<nav id="nav">
-						
-						<ul class="icons">
-						    <li><a href=" https://www.linkedin.com/in/venkateshak1/" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
-							<li><a href="https://github.com/Version1Venky" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+        /* Buttons & Cards */
+        .btn{ display:inline-flex; align-items:center; gap:.6rem; font-weight:800; padding:.85rem 1.2rem; border-radius:14px; text-decoration:none; cursor:pointer; transform: translateZ(0); transition: transform .12s ease, box-shadow .12s ease, background .2s ease, color .2s ease; }
+        .btn:active{transform: translateY(1px) scale(.99)}
+        .btn-primary{ color:#fff; background:linear-gradient(90deg,var(--accent),var(--accent2)); box-shadow: var(--shadow-1); }
+        .btn-primary:hover{transform: translateY(-2px); box-shadow: var(--shadow-2)}
+        .btn-ghost{ color: var(--accent); border:2px solid var(--accent); background: transparent; }
+        .btn-ghost:hover{ color: #fff; background: var(--accent) }
+        .magnet{will-change: transform}
+        .btn-icon{width:16px; height:16px; fill:currentColor}
+        .section-title{text-align:center;font-size:clamp(1.4rem,2.5vw,1.9rem);margin: 24px 0 4px}
+        .grid{ max-width:1200px;margin: 10px auto 60px; padding: 0 20px; display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 18px; }
+        .card{ position:relative; border-radius:18px; overflow:hidden; background: color-mix(in oklab, var(--surface) 90%, transparent); border: 1px solid var(--glass-border); box-shadow: var(--shadow-1); transform: perspective(900px) rotateX(0) rotateY(0) translateZ(0); transform-style: preserve-3d; transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s ease, border-color .25s ease, opacity .6s ease; opacity: 0; translate: 0 14px; cursor: pointer; }
+        .card.reveal{opacity:1; translate: 0 0}
+        .card:after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, transparent, rgba(255,255,255,.06) 40%, transparent 60%); pointer-events:none; mix-blend-mode: overlay; opacity:.0; transition: opacity .25s ease; }
+        .card:hover:after{opacity:.35}
+        .card .thumb{width:100%; height:200px; object-fit:cover; display:block; translate: 0 0 1px}
+        .card-body{padding:14px 16px 10px}
+        .card h3{margin:.2rem 0 .45rem; font-size: 1.14rem}
+        .card p{margin:0 0 .6rem; color: var(--muted); font-size: .98rem}
+        .tags{padding:0 16px 14px}
+        .tag{display:inline-block; padding:.26rem .6rem; border-radius:999px; font-size:.78rem; color:#fff; background:linear-gradient(90deg,var(--accent),var(--accent2)); margin:0 .35rem .35rem 0}
+        .actions{padding:0 16px 16px}
 
-				<!-- Main -->
-					<div id="main">
+        /* Project Modal Styles */
+        #projectModal { position: fixed; inset: 0; z-index: 100; background: var(--modal-bg); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility .3s ease; }
+        #projectModal.is-open { opacity: 1; visibility: visible; }
+        .modal-content { background: var(--modal-content-bg); border-radius: 20px; max-width: 800px; width: 90%; max-height: 90vh; overflow-y: auto; padding: 30px; box-shadow: var(--shadow-2); transform: translateY(20px); transition: transform .3s ease; position: relative; }
+        #projectModal.is-open .modal-content { transform: translateY(0); }
+        .modal-content h2 { font-size: 1.8rem; margin-top: 0; color: var(--accent); }
+        .modal-content h4 { font-size: 1.1rem; margin: 1.5rem 0 .5rem; color: var(--heading); }
+        .modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.5rem; color: var(--muted); cursor: pointer; transition: color .2s ease; }
+        .modal-close:hover { color: var(--heading); }
 
-						<!-- Featured Post -->
-							<article class="post featured">
-								<header class="major">
-									<h2><a href="https://app.powerbi.com/view?r=eyJrIjoiYTJkZjIwOTktN2E5Zi00ZDhlLWI5MWQtMWJlYmI5NmY5MzQzIiwidCI6IjYwZWY3MWMwLTBlNWUtNDM1NS1iOTZlLWU0YzhhZGU0OGU0YSJ9"> WEATHER DATA ANALYTICS Dashboard <br />
-									</a></h2>
-									<p> I developed an interactive Weather Analytics Dashboard that visualizes real-time and forecasted weather data using the WeatherAPI. The project automates data extraction, transformation, and loading to Power BI, enabling detailed insights into key climate indicators such as temperature, humidity, UV index, wind speed, and air quality.
+        /* Contact Section */
+        .contact{ max-width: 1100px; margin: 0 auto 90px; padding: 0 20px; display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+        .contact .block{ background: color-mix(in oklab, var(--surface) 90%, transparent); border: 1px solid var(--glass-border); border-radius:16px; padding:16px 18px; box-shadow: var(--shadow-1); }
+        .contact .block h3{color:var(--accent); font-size:1.1rem; margin-top:0}
+        .contact .block p{margin:0}
+        .social-icons-group { display: flex; gap: 1.2rem; align-items: center; }
+        .social-icons-group svg { width: 24px; height: 24px; fill: var(--muted); transition: fill .2s ease; }
+        .social-icons-group a:hover svg { fill: var(--accent); }
 
-                                       Using DAX measures, I implemented calculations for average forecast temperature, daily trends, and comparative metrics to monitor changes across locations and time periods. The dashboard design emphasizes clarity and interactivity, featuring line charts, cards, and filters for day-wise analytics, as well as sunrise-to-sunset tracking visuals.
+        /* Cursor blob */
+        .cursor-blob{ position: fixed; inset: 0; margin: -210px 0 0 -210px; z-index: -1; pointer-events: none; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 22%, transparent), transparent 70%); filter: blur(35px) saturate(120%); opacity: .35; transition: opacity .35s ease; }
 
-                                        This project demonstrates my ability to combine data engineering (API integration + data cleaning) with data visualization and storytelling. It highlights skills in Power BI, Power Query (M language), DAX, and data modelling, showcasing how external API data can be transformed into actionable, real-time insights for environmental monitoring and decision support</p>
-								</header>
-								<a href="https://app.powerbi.com/view?r=eyJrIjoiYTJkZjIwOTktN2E5Zi00ZDhlLWI5MWQtMWJlYmI5NmY5MzQzIiwidCI6IjYwZWY3MWMwLTBlNWUtNDM1NS1iOTZlLWU0YzhhZGU0OGU0YSJ9" class="image main"><img src="images/Weather.jpg" alt="" /></a>
-								<ul class="actions special">
-									
-									<li><a href="https://app.powerbi.com/view?r=eyJrIjoiYTJkZjIwOTktN2E5Zi00ZDhlLWI5MWQtMWJlYmI5NmY5MzQzIiwidCI6IjYwZWY3MWMwLTBlNWUtNDM1NS1iOTZlLWU0YzhhZGU0OGU0YSJ9" class="button large">VIEW PROJECT</a></li>
-								</ul>
-							</article>
-                        <!-- Posts -->
-							<section class="posts">
-								<article>
-									<header>
-										<h2><a href="https://github.com/Version1Venky/Writing-Assistance">Context Aware Writing Assistance using Knowledge Graph and Eye Tracking<br />
-										</a></h2>
-									</header>
-									<a href="https://github.com/Version1Venky/Writing-Assistance" class="image fit"><img src="images/Writing_Assistance_Project.jpg" alt="" /></a>
-									<p> I built a Context-Aware Writing Assistant that integrates eye-tracking, knowledge graphs, and large language models (LLMs) to provide intelligent, real-time writing support. Developed with React, Tailwind, and FastAPI, the system detects user difficulty through gaze patterns and leverages LLMs with semantic context to deliver meaningful, personalized suggestions that go far beyond simple grammar correction.</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/Version1Venky/Writing-Assistance" class="button">VIEW PROJECT</a></li>
-									</ul>
-								</article>
-						<!-- Posts -->
-							<section class="posts">
-								<article>
-									<header>
-										<h2><a href="https://github.com/Version1Venky/Portfolio-Optimization-">Portfolio Optimization Using Genetic Algorithm<br />
-										</a></h2>
-									</header>
-									<a href="https://github.com/Version1Venky/Portfolio-Optimization-" class="image fit"><img src="images/PORTFOILIO.jpg" alt="" /></a>
-									<p> Implemented portfolio optimization using Genetic Algorithms in R, optimizing asset weights for better risk-return trade-offs. Compared against random and equal-weight portfolios, the GA approach consistently achieved higher risk-adjusted performance and demonstrated strong generalization on unseen data.</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/Version1Venky/Portfolio-Optimization-" class="button">VIEW PROJECT</a></li>
-									</ul>
-								</article>
-				<!-- Posts -->
-							<section class="posts">
-								<article>
-									<header>
-										<h2><a href="https://github.com/Version1Venky/customer-churn-analytics">customer-churn-analytics<br />
-										</a></h2>
-									</header>
-									<a href="https://github.com/Version1Venky/customer-churn-analytics" class="image fit"><img src="images/chrun predict.jpg" alt="" /></a>
-									<p> I developed an end-to-end churn analytics solution using SQL, Python, and Power BI to predict and understand customer churn. The project involved cleaning and transforming raw data with SQL, performing exploratory analysis, and building machine learning models (Logistic Regression and Random Forest), where the Random Forest achieved 93% accuracy with an F1 score of 0.93. Finally, I designed an interactive Power BI dashboard showcasing KPIs (Total Customers, Churn Rate, Retention Rate) and churn insights by contract type, tenure, and payment method. This project demonstrates my ability to combine data engineering, machine learning, and business intelligence to deliver actionable insights for customer retention strategies.</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/Version1Venky/customer-churn-analytics" class="button">VIEW PROJECT</a></li>
-									</ul>
-								</article>
-				
-						<section class="split contact">
-							<section class="alt">
-								<h3>Address</h3>
-								<p><a href = "https://www.google.com/search?q=glasgow&sca_esv=275e958b5b84d9d6&rlz=1C1RXQR_en-GBIN1104IN1104&sxsrf=AE3TifMbH9m6RHbincWz0cdfns-COcqiZg%3A1759106202819&ei=mtTZaNjlMaerhbIPw82p4Q8&ved=0ahUKEwjYmt2i3fyPAxWnVUEAHcNmKvwQ4dUDCBA&uact=5&oq=glasgow&gs_lp=Egxnd3Mtd2l6LXNlcnAiB2dsYXNnb3cyChAjGIAEGCcYigUyBBAjGCcyChAjGIAEGCcYigUyChAuGIAEGEMYigUyFhAuGIAEGLEDGEMYxwEYigUYjgUYrwEyDRAuGIAEGLEDGBQYhwIyCBAAGIAEGLEDMhAQABiABBixAxiDARgUGIcCMg0QABiABBixAxhDGIoFMggQABiABBixAzIZEC4YgAQYQxiKBRiXBRjcBBjeBBjgBNgBAUjdYFDcHVjMPHAEeAGQAQCYAVugAaABqgEBMrgBA8gBAPgBAZgCBqACygHCAgoQABiwAxjWBBhHwgINEAAYgAQYsAMYQxiKBcICHBAuGIAEGLADGEMYxwEYyAMYigUYjgUYrwHYAQHCAhMQLhiABBiwAxhDGMgDGIoF2AEBwgIOEAAYsAMY5AIY1gTYAQHCAhEQLhiABBixAxjHARiOBRivAZgDAIgGAZAGEroGBggBEAEYCJIHAzUuMaAHpiKyBwMxLjG4B7EBwgcFMi01LjHIByI&sclient=gws-wiz-serp">Glasgow,  United Kingdom</a><br />
-								
-							</section>
-							<section>
-								<h3>Phone</h3>
-								<p><a href="#">+44 7587749703</a></p>
-							</section>
-							<section>
-								<h3>Email</h3>
-								<p><a href="https://mail.google.com/mail/u/0/#inbox">kardilevenkatesh@gmail.com</a></p>
-							</section>
-							<section>
-								<h3>Social</h3>
-								<ul class="icons alt">
-									<li><a href="https://www.linkedin.com/in/venkateshak1/" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
-									<li><a href="https://github.com/Version1Venky" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
+        /* Theme toggle */
+        .theme-toggle{ position: fixed; right: 18px; bottom: 18px; z-index: 60 }
+        .theme-btn{
+            border-radius: 999px; border:1px solid var(--glass-border); padding:.7rem 1rem; background: color-mix(in oklab, var(--surface) 92%, transparent); color: var(--heading);
+            box-shadow: var(--shadow-1); cursor:pointer; font-weight:800;
+            transition: transform .15s ease, opacity .2s ease, background .2s ease;
+        }
+        .theme-btn:hover{ transform: translateY(-2px); opacity:.95 }
+
+        /* Reduce motion support */
+        @media (prefers-reduced-motion: reduce){
+            .card, .btn, .site-header, body{transition: none}
+            .card{transform: none}
+            .bg-gradient{animation: none !important;}
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav { justify-content: center; }
+            .modal-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <div class="bg-wrap" aria-hidden="true">
+        <div class="bg-grid"></div>
+    </div>
+
+    <div class="cursor-blob" id="cursorBlob" aria-hidden="true"></div>
+
+    <header class="site-header" id="siteHeader" role="banner">
+        <div class="nav">
+            <a class="brand" href="#top">
+                <span class="brand-mark" aria-hidden="true"></span>
+                <span>Venkatesh Kardile</span>
+            </a>
+            <nav class="nav-links" aria-label="Main">
+                <a href="#projects">Projects</a>
+                <a href="#contact">Inquire</a> 
+                <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky" target="_blank" rel="noopener">
+                    <svg class="btn-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.51.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2.0-.21.15-.46.55-.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                    <span>GitHub</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="intro" aria-label="Intro">
+        <div class="layer" id="heroLayer" aria-hidden="true"></div>
+        
+        <img class="profile-photo" src="images/profile-pic (1).jpg" alt="Venkatesh Kardile professional headshot" id="profilePhoto" />
+        
+        <h1>Data Analyst turning complex data into clear decisions</h1>
+        <p class="lead">
+            I design fast, focused dashboards and intelligent data products using **Power BI, Python, SQL, R, DAX** and **FastAPI**. Results that speak in charts, not noise.
+        </p>
+        <div class="cta">
+            <a class="btn btn-primary magnet" href="mailto:kardilevenkatesh@gmail.com?subject=Inquiry%20Regarding%20Data%20Analyst%20Portfolio"><svg class="btn-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 4A2 2 0 0 1 2 2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.828V5.383zm-.055 6.438-2.676-1.606L8 10.383 3.676 7.215 1.055 8.243A1 1 1 0 0 0 2 13h12a1 1 0 0 0 .945-1.179zM1 11.828l4.758-2.855L1 5.383v6.445z"/></svg><span>Contact Me</span></a>
+            <a class="btn btn-ghost magnet" href="https://linkedin.com/in/venkateshak1" target="_blank" rel="noopener"><svg class="btn-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.146C0 .513.526 0 1.176 0h13.648c.65 0 1.176.513 1.176 1.146v13.708c0 .633-.526 1.146-1.176 1.146H1.176C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V9.17h-2.28c-.28 0-.41-.14-.41-.482V4.76h2.69v4.22h.02c.3-.46.54-1.12.54-1.92 0-1.84 1.25-2.7 2.34-2.7 1.37 0 2.27 1.14 2.27 3.5v4.22h2.69V8.78c0-2.36-1.46-3.48-3.46-3.48-1.55 0-2.58.85-3.05 1.6h-.02V4.76H4.943zM3.4 3.99c-.66 0-1.2.51-1.2 1.14 0 .63.54 1.14 1.2 1.14s1.2-.51 1.2-1.14c0-.63-.54-1.14-1.2-1.14z"/></svg><span>LinkedIn</span></a>
+        </div>
+    </section>
+
+    <main id="main">
+        <h2 class="section-title" id="projects">Featured Work</h2>
+        <section class="grid" aria-label="Project cards">
+            <article class="card will-reveal" data-tilt data-project-id="weather">
+                <img class="thumb" loading="lazy" src="images/Weather.jpg" alt="Weather Analytics Dashboard preview" />
+                <div class="card-body">
+                    <h3>Real Time Weather Dashboard</h3>
+                    <p>Power BI dashboard using WeatherAPI data: temperature, humidity, UV, precipitation, wind and DAX driven trends.</p>
+                </div>
+                <div class="tags">
+                    <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">API</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-ghost magnet" href="https://app.powerbi.com/view?r=eyJrIjoiYTJkZjIwOTktN2E5Zi00ZDhlLWI5MWQtMWJlYmI5NmY5MzQzIiwidCI6IjYwZWY3MWMwLTBlNWUtNDM1NS1iOTZlLWU0YzhhZGU0OGU0YSJ9" target="_blank" rel="noopener">Open Report</a>
+                </div>
+            </article>
+
+            <article class="card will-reveal" data-tilt data-project-id="writing">
+                <img class="thumb" loading="lazy" src="images/Writing_Assistance_Project.jpg" alt="Context Aware Writing Assistance preview" />
+                <div class="card-body">
+                    <h3>Context Aware Writing Assistance</h3>
+                    <p>Human AI system with eye tracking and knowledge graphs to deliver semantic writing support in real time. Built with React and FastAPI.</p>
+                </div>
+                <div class="tags">
+                    <span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">LLM</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/Writing-Assistance" target="_blank" rel="noopener">Repository</a>
+                </div>
+            </article>
+
+            <article class="card will-reveal" data-tilt data-project-id="portfolio">
+                <img class="thumb" loading="lazy" src="images/PORTFOILIO.jpg" alt="Portfolio Optimization GA preview" />
+                <div class="card-body">
+                    <h3>Portfolio Optimization with GA</h3>
+                    <p>Genetic Algorithms in R to optimize asset weights and improve risk return trade offs. Benchmarked against random and equal weight portfolios.</p>
+                </div>
+                <div class="tags">
+                    <span class="tag">R</span><span class="tag">Genetic Algorithm</span><span class="tag">Finance</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/Portfolio-Optimization-" target="_blank" rel="noopener">Repository</a>
+                </div>
+            </article>
+
+            <article class="card will-reveal" data-tilt data-project-id="churn">
+                <img class="thumb" loading="lazy" src="images/chrun predict.jpg" alt="Customer Churn Analytics dashboard preview" />
+                <div class="card-body">
+                    <h3>Customer Churn Analytics</h3>
+                    <p>End to end churn prediction with SQL, Python and Power BI. Interactive KPIs highlight retention levers and risk segments.</p>
+                </div>
+                <div class="tags">
+                    <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Power BI</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/customer-churn-analytics" target="_blank" rel="noopener">Repository</a>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <section class="contact" id="contact" aria-label="Contact">
+        <div class="block">
+            <h3>Location</h3>
+            <p>Glasgow, United Kingdom</p>
+        </div>
+        <div class="block">
+            <h3>Phone</h3>
+            <p><a href="tel:+447587749703" rel="noopener">+44 7587749703</a></p>
+        </div>
+        <div class="block">
+            <h3>Email</h3>
+            <p><a href="mailto:kardilevenkatesh@gmail.com" rel="noopener">kardilevenkatesh@gmail.com</a></p>
+        </div>
+        <div class="block">
+            <h3>Social</h3>
+            <div class="social-icons-group">
+                <a href="https://www.linkedin.com/in/venkateshak1/" target="_blank" rel="noopener" aria-label="LinkedIn Profile">
+                    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.146C0 .513.526 0 1.176 0h13.648c.65 0 1.176.513 1.176 1.146v13.708c0 .633-.526 1.146-1.176 1.146H1.176C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V9.17h-2.28c-.28 0-.41-.14-.41-.482V4.76h2.69v4.22h.02c.3-.46.54-1.12.54-1.92 0-1.84 1.25-2.7 2.34-2.7 1.37 0 2.27 1.14 2.27 3.5v4.22h2.69V8.78c0-2.36-1.46-3.48-3.46-3.48-1.55 0-2.58.85-3.05 1.6h-.02V4.76H4.943zM3.4 3.99c-.66 0-1.2.51-1.2 1.14 0 .63.54 1.14 1.2 1.14s1.2-.51 1.2-1.14c0-.63-.54-1.14-1.2-1.14z"/></svg>
+                </a>
+                <a href="https://github.com/Version1Venky" target="_blank" rel="noopener" aria-label="GitHub Profile">
+                    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.51.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2.0-.21.15-.46.55-.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="theme-toggle">
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">🌞 / 🌙</button>
+    </div>
+
+    <div id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 id="modalTitle"></h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. ABOUT ME DATA (FINAL VERSION) ---
+        const aboutMeData = {
+            title: "About Venkatesh Kardile",
+            content: `
+                <h4>Education & Background</h4>
+                <p>I hold a **Master's in Advanced Computer Science with Data Science** from the prestigious **University of Strathclyde, Glasgow**. My academic focus was on cutting-edge machine learning and predictive analytics techniques.</p>
+                <h4>Core Expertise</h4>
+                <p>My expertise lies in the full data lifecycle: from extracting and cleaning large datasets using **SQL** and **Python** to building predictive models and communicating results through powerful visualizations in **Power BI**.</p>
+                <h4>Key Achievements</h4>
+                <ul>
+                    <li>Successfully built and deployed a **Context-Aware Writing Assistance** system, demonstrating proficiency in LLMs, React, and FastAPI.</li>
+                </ul>
+                <h4>Career Goal</h4>
+                <p>I aim to bridge the gap between complex data and actionable business strategy, driving measurable results through advanced analytics and modern data tools.</p>
+                <h4>Technical Skills Snapshot</h4>
+                <p>Power BI, Python (Pandas, Scikit-learn), SQL, R, DAX, FastAPI, React, Git.</p>
+            `
+        };
+
+        // --- 1. PROJECT DATA (unchanged) ---
+        const projectData = {
+            weather: {
+                title: "Real Time Weather Dashboard",
+                content: `
+                    <h4>Goals & Approach</h4>
+                    <p>To showcase real-time API integration and advanced Power BI visualization techniques. The report features custom-calculated metrics for heat stress and wind chill, utilizing complex <strong>DAX</strong> logic to provide actionable insights into current and forecasted conditions.</p>
+                    <h4>Technology Stack</h4>
+                    <p><strong>Power BI, DAX, WeatherAPI, Power Query (M Language)</strong></p>
+                    <h4>Impact</h4>
+                    <p>Demonstrates end-to-end data pipeline proficiency, from extraction and transformation to interactive dashboard deployment and advanced analytical measures.</p>
+                `
+            },
+            writing: {
+                title: "Context Aware Writing Assistance",
+                content: `
+                    <h4>Goals & Approach</h4>
+                    <p>To build a functional prototype of a collaborative AI tool leveraging large language models (LLMs). The project uses a <strong>React frontend</strong> for the eye-tracking UI and a <strong>FastAPI backend</strong> to manage knowledge graphs and serve real-time semantic suggestions.</p>
+                    <h4>Technology Stack</h4>
+                    <p><strong>React/JavaScript, FastAPI/Python, LLM Prompting, Knowledge Graphs</strong></p>
+                    <h4>Result</h4>
+                    <p>Provides a robust framework for human-in-the-loop AI applications, proving full-stack development capability in data-driven systems.</p>
+                `
+            },
+            portfolio: {
+                title: "Portfolio Optimization with GA",
+                content: `
+                    <h4>Goals & Approach</h4>
+                    <p>To apply evolutionary computation to solve a complex financial problem. <strong>Genetic Algorithms (GA)</strong> in <strong>R</strong> were used to find the global optimum portfolio weights, achieving a superior Sharpe Ratio compared to traditional Mean-Variance Optimization.</p>
+                    <h4>Methodology</h4>
+                    <p>Monte Carlo simulation, GA fitness function design, Time Series Analysis (R)</p>
+                    <h4>Result</h4>
+                    <p>Demonstrated deep quantitative skills and the ability to apply advanced computational methods in finance for improved risk-return trade-offs.</p>
+                `
+            },
+            churn: {
+                title: "Customer Churn Analytics",
+                content: `
+                    <h4>Goals & Approach</h4>
+                    <p>To create a proactive system for reducing customer attrition. The project involved **SQL** for data cleaning and feature engineering, **Python (Scikit-learn)** for predictive modeling, and a **Power BI dashboard** to visualize high-risk segments and intervention strategies.</p>
+                    <h4>Outcome & Accuracy</h4>
+                    <p>The model achieved **88% accuracy** in predicting churn risk. The Power BI dashboard provides marketing teams with clear, actionable insights into retention levers.</p>
+                    <h4>Technology Stack</h4>
+                    <p><strong>SQL (for ETL), Python (Modeling), Power BI (Visualization)</strong></p>
+                `
+            }
+        };
+
+        // --- 2. MODAL CONTROLS ---
+        const modal = document.getElementById('projectModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+        const projectCards = document.querySelectorAll('.card[data-project-id]');
+        const profilePhoto = document.getElementById('profilePhoto');
+
+        function openModal(title, content) {
+            modalTitle.textContent = title;
+            modalBody.innerHTML = content;
+            modal.classList.add('is-open');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+
+        // Project Card Click Listener
+        projectCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.actions a')) {
+                    return;
+                }
+                const projectId = card.getAttribute('data-project-id');
+                const data = projectData[projectId];
+                if (data) {
+                    openModal(data.title, data.content);
+                }
+            });
+        });
+
+        // Profile Photo Click Listener
+        profilePhoto.addEventListener('click', () => {
+            openModal(aboutMeData.title, aboutMeData.content);
+        });
 
 
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+        });
 
-			</div>
+        // --- 3. ORIGINAL UX SCRIPTS ---
+        
+        // Theme Logic
+        const themeKey = 'theme';
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem(themeKey) || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeToggle.addEventListener('click', () => {
+            const curr = document.documentElement.getAttribute('data-theme');
+            const next = curr === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem(themeKey, next);
+        });
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+        // Shrink header on scroll
+        const header = document.getElementById('siteHeader');
+        const onScroll = () => header.classList.toggle('compact', window.scrollY > 10);
+        window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-	</body>
+        // Parallax hero + cursor blob
+        const layer = document.getElementById('heroLayer');
+        const blob = document.getElementById('cursorBlob');
+        let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
+        window.addEventListener('pointermove', e => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            blob.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+        }, {passive:true});
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - .5) * 10;
+            const y = (e.clientY / window.innerHeight - .5) * 10;
+            if (layer) layer.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        }, {passive:true});
+
+        // Magnetic buttons
+        const magnets = document.querySelectorAll('.magnet');
+        magnets.forEach(el => {
+            const strength = 18;
+            el.addEventListener('mousemove', e => {
+                const rect = el.getBoundingClientRect();
+                const dx = (e.clientX - rect.left - rect.width/2) / (rect.width/2);
+                const dy = (e.clientY - rect.top - rect.height/2) / (rect.height/2);
+                el.style.transform = `translate(${dx*strength}px, ${dy*strength}px)`;
+            });
+            el.addEventListener('mouseleave', () => el.style.transform = 'translate(0,0)');
+        });
+
+        // Card tilt (vanilla)
+        const tiltCards = document.querySelectorAll('[data-tilt]');
+        tiltCards.forEach(card => {
+            const maxTilt = 7; const relax = () => card.style.transform = 'perspective(900px) rotateX(0) rotateY(0)';
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width;
+                const py = (e.clientY - r.top) / r.height;
+                const rx = (py - .5) * -maxTilt; // invert for natural tilt
+                const ry = (px - .5) * maxTilt;
+                card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+            });
+            card.addEventListener('mouseleave', relax);
+            card.addEventListener('blur', relax, true);
+        });
+
+        // Reveal on scroll (using Intersection Observer)
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if(!prefersReduced && 'IntersectionObserver' in window){
+            const io = new IntersectionObserver((entries, obs)=>{
+                entries.forEach(ent=>{
+                    if(ent.isIntersecting){ ent.target.classList.add('reveal'); obs.unobserve(ent.target); }
+                });
+            }, {threshold:.16, rootMargin:'0px 0px -8% 0px'});
+            document.querySelectorAll('.will-reveal').forEach(el=>io.observe(el));
+        } else {
+            document.querySelectorAll('.will-reveal').forEach(el=>el.classList.add('reveal'));
+        }
+    </script>
+</body>
 </html>
