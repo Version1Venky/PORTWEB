@@ -5,11 +5,15 @@
     <title>Venkatesh Kardile — Data Analyst Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Data Analyst portfolio — Power BI, Python, SQL, R, DAX, FastAPI. Advanced animations and premium UI." />
-    <link rel="icon" href="images/favicon.png" /> 
-    <meta property="og:title" content="Venkatesh Kardile — Portfolio" />
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+    <link rel="icon" href="/assets/favicon_io/favicon.ico"> <meta property="og:title" content="Venkatesh Kardile — Portfolio" />
     <meta property="og:description" content="Dashboards, ML projects, and interactive demos." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="images/Weather.jpg" />
+    <meta property="og:image" content="images/Weather.jpg" /> 
     <meta property="og:url" content="https://venkateshkardile.com" />
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRE5C5XE1E"></script>
@@ -127,6 +131,7 @@
         .site-header.compact{ padding: 8px 16px; background: color-mix(in oklab, var(--glass) 90%, transparent); }
         .nav{ max-width: 1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; }
         .brand{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:.2px}
+        /* --- Original brand-mark style --- */
         .brand-mark{width:12px;height:12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 0 6px color-mix(in oklab, var(--accent) 20%, transparent)}
         .nav-links{display:flex;align-items:center;gap:1rem; color:var(--muted); font-weight:700}
         .nav-links a:hover{color:var(--heading)}
@@ -159,7 +164,7 @@
             border-radius: 16px;
             padding: 24px 28px;
             box-shadow: var(--shadow-1);
-            text-align: left; /* Override parent center align */
+            text-align: left; 
         }
         .about-me h3 {
             color: var(--accent);
@@ -268,7 +273,6 @@
         .modal-close:hover { color: var(--heading); }
 
         /* Contact Section */
-        /* --- START: Added styles for Call to Action --- */
         .contact-container {
             max-width: 1100px;
             margin: 0 auto 90px;
@@ -280,8 +284,7 @@
             color: var(--muted);
             margin-bottom: 20px;
         }
-         /* --- END: Added styles for Call to Action --- */
-        .contact{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:16px; } /* Removed width/margin from here */
+        .contact{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:16px; } 
         .contact .block{ background: color-mix(in oklab, var(--surface) 90%, transparent); border: 1px solid var(--glass-border); border-radius:16px; padding:16px 18px; box-shadow: var(--shadow-1); }
         .contact .block h3{color:var(--accent); font-size:1.1rem; margin-top:0}
         .contact .block p{margin:0}
@@ -306,13 +309,12 @@
             .card, .btn, .site-header, body{transition: none}
             .card{transform: none}
             .bg-gradient{animation: none !important;}
-            /* Stop scroller animation and make it a normal scroll area */
             .scroller-inner { animation: none; }
             .scroller-wrap { 
                 overflow-x: auto; 
                 mask-image: none;
                 -webkit-mask-image: none;
-                padding-left: 20px; /* Add back some padding */
+                padding-left: 20px; 
             }
             .scroller-inner .card {
                 width: 320px;
@@ -324,7 +326,7 @@
             .nav { justify-content: center; }
             .modal-content { padding: 20px; }
             .about-content {
-                grid-template-columns: 1fr; /* Stack columns on smaller screens */
+                grid-template-columns: 1fr; 
             }
         }
     </style>
@@ -343,8 +345,10 @@
                 <span>Venkatesh Kardile</span>
             </a>
             <nav class="nav-links" aria-label="Main">
-                <a href="#about">About</a> <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a> <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky" target="_blank" rel="noopener">
+                <a href="#about">About</a> 
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a> 
+                <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky" target="_blank" rel="noopener">
                     <svg class="btn-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.51.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2.0-.21.15-.46.55-.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/></svg>
                     <span>GitHub</span>
                 </a>
@@ -394,6 +398,7 @@
             </div>
         </div>
     </section>
+
     <main id="main">
         <h2 class="section-title" id="projects">Featured Work</h2>
         
@@ -582,6 +587,8 @@
             </div>
         </section>
     </div>
+
+
     <div class="theme-toggle">
         <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">🌞 / 🌙</button>
     </div>
@@ -598,7 +605,7 @@
         // --- FIX: DECLARE MISSING VARIABLE ---
         const relax = () => {}; 
         
-        // --- 1. ABOUT ME DATA (FINAL VERSION) ---
+        // --- 1. ABOUT ME DATA ---
         const aboutMeData = {
             title: "About Venkatesh Kardile",
             content: `
@@ -617,7 +624,7 @@
             `
         };
 
-        // --- 1. PROJECT DATA (Updated Descriptions) ---
+        // --- 1. PROJECT DATA ---
         const projectData = {
             uber: { 
                 title: "Uber Analysis Dashboard",
@@ -670,7 +677,7 @@
                     <p>The GA approach achieved a superior Sharpe Ratio, demonstrating the potential of computational methods in finance to improve risk-return trade-offs beyond traditional techniques. Showcased deep quantitative and programming skills in R.</p>
                 `
             },
-            churn: { // Description already focuses on impact, no major change needed
+            churn: { 
                 title: "Customer Churn Analytics",
                 content: `
                     <h4>Goals & Approach</h4>
