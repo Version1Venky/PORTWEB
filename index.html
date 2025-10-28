@@ -5,7 +5,7 @@
     <title>Venkatesh Kardile — Data Analyst Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Data Analyst portfolio — Power BI, Python, SQL, R, DAX, FastAPI. Advanced animations and premium UI." />
-    <link rel="icon" href="images/favicon.png" />
+    <link rel="icon" href="images/favicon.png" /> 
     <meta property="og:title" content="Venkatesh Kardile — Portfolio" />
     <meta property="og:description" content="Dashboards, ML projects, and interactive demos." />
     <meta property="og:type" content="website" />
@@ -75,8 +75,8 @@
             font-family: var(--font-family);
             background-color: var(--bg);
             background-image: radial-gradient(40vw 40vw at 15% 20%, color-mix(in oklab, var(--accent) 15%, transparent) 0%, transparent 60%),
-                                 radial-gradient(50vw 50vw at 85% 20%, color-mix(in oklab, var(--accent2) 15%, transparent) 0%, transparent 60%),
-                                 radial-gradient(60vw 60vw at 50% 110%, color-mix(in oklab, #00d3ff 8%, transparent) 0%, transparent 60%);
+                              radial-gradient(50vw 50vw at 85% 20%, color-mix(in oklab, var(--accent2) 15%, transparent) 0%, transparent 60%),
+                              radial-gradient(60vw 60vw at 50% 110%, color-mix(in oklab, #00d3ff 8%, transparent) 0%, transparent 60%);
         }
         h1,h2,h3,h4,h5,h6{color:var(--heading)}
         a{color:inherit;text-decoration:none}
@@ -92,7 +92,7 @@
             border: 4px solid var(--accent); 
             box-shadow: var(--shadow-1);
             filter: grayscale(10%); 
-            cursor: pointer; /* Added pointer to indicate clickability */
+            cursor: pointer; 
             transition: transform 0.2s ease;
         }
         .profile-photo:hover {
@@ -144,6 +144,52 @@
         .hero p.lead{font-size: clamp(1rem, 1.8vw, 1.15rem); color: var(--muted); max-width: 900px; margin: 0 auto 1.2rem}
         .cta{display:inline-flex; gap:.9rem; flex-wrap:wrap; justify-content:center; margin-top: .8rem}
 
+        /* About Me Section */
+        .about-me {
+            max-width: 1100px;
+            margin: 60px auto; 
+            padding: 0 20px;
+        }
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            background: color-mix(in oklab, var(--surface) 90%, transparent);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            box-shadow: var(--shadow-1);
+            text-align: left; /* Override parent center align */
+        }
+        .about-me h3 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+        }
+        .about-me p {
+            margin-bottom: 1rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .about-skills ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+        }
+        .about-skills li {
+            background: color-mix(in oklab, var(--glass) 80%, transparent);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
         /* Buttons & Cards */
         .btn{ display:inline-flex; align-items:center; gap:.6rem; font-weight:800; padding:.85rem 1.2rem; border-radius:14px; text-decoration:none; cursor:pointer; transform: translateZ(0); transition: transform .12s ease, box-shadow .12s ease, background .2s ease, color .2s ease; }
         .btn:active{transform: translateY(1px) scale(.99)}
@@ -154,9 +200,49 @@
         .magnet{will-change: transform}
         .btn-icon{width:16px; height:16px; fill:currentColor}
         .section-title{text-align:center;font-size:clamp(1.4rem,2.5vw,1.9rem);margin: 24px 0 4px}
-        .grid{ max-width:1200px;margin: 10px auto 60px; padding: 0 20px; display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 18px; }
-        .card{ position:relative; border-radius:18px; overflow:hidden; background: color-mix(in oklab, var(--surface) 90%, transparent); border: 1px solid var(--glass-border); box-shadow: var(--shadow-1); transform: perspective(900px) rotateX(0) rotateY(0) translateZ(0); transform-style: preserve-3d; transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s ease, border-color .25s ease, opacity .6s ease; opacity: 0; translate: 0 14px; cursor: pointer; }
-        .card.reveal{opacity:1; translate: 0 0}
+        
+        /* Scroller Styles */
+        @keyframes scroll {
+          to {
+            transform: translate(calc(-50% - var(--_card-gap) / 2));
+          }
+        }
+        .scroller-wrap {
+          overflow: hidden;
+          max-width: 1200px; 
+          margin: 10px auto 60px;
+          mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+        }
+        .scroller-inner {
+          --_card-width: 320px; 
+          --_card-gap: 18px;
+          
+          display: flex;
+          gap: var(--_card-gap);
+          padding-block: 18px; 
+          list-style: none;
+          margin: 0; padding-left: 0;
+          width: fit-content; 
+          animation: scroll 40s linear infinite;
+        }
+        .scroller-inner.is-paused {
+          animation-play-state: paused;
+        }
+        .scroller-inner .card {
+          width: var(--_card-width);
+          opacity: 1;
+          translate: 0 0;
+        }
+
+        .card { 
+            position:relative; border-radius:18px; overflow:hidden; background: color-mix(in oklab, var(--surface) 90%, transparent); border: 1px solid var(--glass-border); box-shadow: var(--shadow-1); transform: perspective(900px) rotateX(0) rotateY(0) translateZ(0); transform-style: preserve-3d; transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s ease, border-color .25s ease, opacity .6s ease; 
+            opacity: 1; translate: 0 0; 
+            cursor: pointer; 
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
         .card:after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, transparent, rgba(255,255,255,.06) 40%, transparent 60%); pointer-events:none; mix-blend-mode: overlay; opacity:.0; transition: opacity .25s ease; }
         .card:hover:after{opacity:.35}
         .card .thumb{width:100%; height:200px; object-fit:cover; display:block; translate: 0 0 1px}
@@ -165,7 +251,11 @@
         .card p{margin:0 0 .6rem; color: var(--muted); font-size: .98rem}
         .tags{padding:0 16px 14px}
         .tag{display:inline-block; padding:.26rem .6rem; border-radius:999px; font-size:.78rem; color:#fff; background:linear-gradient(90deg,var(--accent),var(--accent2)); margin:0 .35rem .35rem 0}
-        .actions{padding:0 16px 16px}
+        
+        .actions {
+            padding:0 16px 16px;
+            margin-top: auto;
+        }
 
         /* Project Modal Styles */
         #projectModal { position: fixed; inset: 0; z-index: 100; background: var(--modal-bg); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility .3s ease; }
@@ -178,7 +268,20 @@
         .modal-close:hover { color: var(--heading); }
 
         /* Contact Section */
-        .contact{ max-width: 1100px; margin: 0 auto 90px; padding: 0 20px; display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+        /* --- START: Added styles for Call to Action --- */
+        .contact-container {
+            max-width: 1100px;
+            margin: 0 auto 90px;
+            padding: 0 20px;
+        }
+        .call-to-action {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+         /* --- END: Added styles for Call to Action --- */
+        .contact{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:16px; } /* Removed width/margin from here */
         .contact .block{ background: color-mix(in oklab, var(--surface) 90%, transparent); border: 1px solid var(--glass-border); border-radius:16px; padding:16px 18px; box-shadow: var(--shadow-1); }
         .contact .block h3{color:var(--accent); font-size:1.1rem; margin-top:0}
         .contact .block p{margin:0}
@@ -203,11 +306,26 @@
             .card, .btn, .site-header, body{transition: none}
             .card{transform: none}
             .bg-gradient{animation: none !important;}
+            /* Stop scroller animation and make it a normal scroll area */
+            .scroller-inner { animation: none; }
+            .scroller-wrap { 
+                overflow-x: auto; 
+                mask-image: none;
+                -webkit-mask-image: none;
+                padding-left: 20px; /* Add back some padding */
+            }
+            .scroller-inner .card {
+                width: 320px;
+            }
         }
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .nav { justify-content: center; }
             .modal-content { padding: 20px; }
+            .about-content {
+                grid-template-columns: 1fr; /* Stack columns on smaller screens */
+            }
         }
     </style>
 </head>
@@ -225,9 +343,8 @@
                 <span>Venkatesh Kardile</span>
             </a>
             <nav class="nav-links" aria-label="Main">
-                <a href="#projects">Projects</a>
-                <a href="#contact">Inquire</a> 
-                <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky" target="_blank" rel="noopener">
+                <a href="#about">About</a> <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a> <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky" target="_blank" rel="noopener">
                     <svg class="btn-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.51.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2.0-.21.15-.46.55-.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/></svg>
                     <span>GitHub</span>
                 </a>
@@ -250,93 +367,221 @@
         </div>
     </section>
 
-    <main id="main">
-        <h2 class="section-title" id="projects">Featured Work</h2>
-        <section class="grid" aria-label="Project cards">
-            <article class="card will-reveal" data-tilt data-project-id="weather">
-                <img class="thumb" loading="lazy" src="images/Weather.jpg" alt="Weather Analytics Dashboard preview" />
-                <div class="card-body">
-                    <h3>Real Time Weather Dashboard</h3>
-                    <p>Power BI dashboard using WeatherAPI data: temperature, humidity, UV, precipitation, wind and DAX driven trends.</p>
-                </div>
-                <div class="tags">
-                    <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">API</span>
-                </div>
-                <div class="actions">
-                    <a class="btn btn-ghost magnet" href="https://app.powerbi.com/view?r=eyJrIjoiYTJkZjIwOTktN2E5Zi00ZDhlLWI5MWQtMWJlYmI5NmY5MzQzIiwidCI6IjYwZWY3MWMwLTBlNWUtNDM1NS1iOTZlLWU0YzhhZGU0OGU0YSJ9" target="_blank" rel="noopener">Open Report</a>
-                </div>
-            </article>
-
-            <article class="card will-reveal" data-tilt data-project-id="writing">
-                <img class="thumb" loading="lazy" src="images/Writing_Assistance_Project.jpg" alt="Context Aware Writing Assistance preview" />
-                <div class="card-body">
-                    <h3>Context Aware Writing Assistance</h3>
-                    <p>Human AI system with eye tracking and knowledge graphs to deliver semantic writing support in real time. Built with React and FastAPI.</p>
-                </div>
-                <div class="tags">
-                    <span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">LLM</span>
-                </div>
-                <div class="actions">
-                    <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/Writing-Assistance" target="_blank" rel="noopener">Repository</a>
-                </div>
-            </article>
-
-            <article class="card will-reveal" data-tilt data-project-id="portfolio">
-                <img class="thumb" loading="lazy" src="images/PORTFOILIO.jpg" alt="Portfolio Optimization GA preview" />
-                <div class="card-body">
-                    <h3>Portfolio Optimization with GA</h3>
-                    <p>Genetic Algorithms in R to optimize asset weights and improve risk return trade offs. Benchmarked against random and equal weight portfolios.</p>
-                </div>
-                <div class="tags">
-                    <span class="tag">R</span><span class="tag">Genetic Algorithm</span><span class="tag">Finance</span>
-                </div>
-                <div class="actions">
-                    <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/Portfolio-Optimization-" target="_blank" rel="noopener">Repository</a>
-                </div>
-            </article>
-
-            <article class="card will-reveal" data-tilt data-project-id="churn">
-                <img class="thumb" loading="lazy" src="images/chrun predict.jpg" alt="Customer Churn Analytics dashboard preview" />
-                <div class="card-body">
-                    <h3>Customer Churn Analytics</h3>
-                    <p>End to end churn prediction with SQL, Python and Power BI. Interactive KPIs highlight retention levers and risk segments.</p>
-                </div>
-                <div class="tags">
-                    <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Power BI</span>
-                </p>
-                <div class="actions">
-                    <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/customer-churn-analytics" target="_blank" rel="noopener">Repository</a>
-                </div>
-            </article>
-        </section>
-    </main>
-
-    <section class="contact" id="contact" aria-label="Contact">
-        <div class="block">
-            <h3>Location</h3>
-            <p>Glasgow, United Kingdom</p>
-        </div>
-        <div class="block">
-            <h3>Phone</h3>
-            <p><a href="tel:+447587749703" rel="noopener">+44 7587749703</a></p>
-        </div>
-        <div class="block">
-            <h3>Email</h3>
-            <p><a href="mailto:kardilevenkatesh@gmail.com" rel="noopener">kardilevenkatesh@gmail.com</a></p>
-        </div>
-        <div class="block">
-            <h3>Social</h3>
-            <div class="social-icons-group">
-                <a href="https://www.linkedin.com/in/venkateshak1/" target="_blank" rel="noopener" aria-label="LinkedIn Profile">
-                    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.146C0 .513.526 0 1.176 0h13.648c.65 0 1.176.513 1.176 1.146v13.708c0 .633-.526 1.146-1.176 1.146H1.176C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V9.17h-2.28c-.28 0-.41-.14-.41-.482V4.76h2.69v4.22h.02c.3-.46.54-1.12.54-1.92 0-1.84 1.25-2.7 2.34-2.7 1.37 0 2.27 1.14 2.27 3.5v4.22h2.69V8.78c0-2.36-1.46-3.48-3.46-3.48-1.55 0-2.58.85-3.05 1.6h-.02V4.76H4.943zM3.4 3.99c-.66 0-1.2.51-1.2 1.14 0 .63.54 1.14 1.2 1.14s1.2-.51 1.2-1.14c0-.63-.54-1.14-1.2-1.14z"/></svg>
-                </a>
-                <a href="https://github.com/Version1Venky" target="_blank" rel="noopener" aria-label="GitHub Profile">
-                    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.51.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2.0-.21.15-.46.55-.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/></svg>
-                </a>
+    <section class="about-me" id="about" aria-label="About Me">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Leveraging Data Science for Business Growth</h3>
+                <p>Holding a Master's in Advanced Computer Science with Data Science from the University of Strathclyde, Glasgow, I specialize in transforming raw data into actionable business intelligence. My passion lies in bridging the gap between complex datasets and strategic decision-making through clear visualizations and predictive modeling. I particularly enjoy applying AI and machine learning techniques to uncover deeper patterns and enhance analytical capabilities.</p>
+                <p>My goal is to help organizations leverage their data effectively, driving measurable results and fostering growth through insightful analytics.</p>
+            </div>
+            <div class="about-skills">
+                <h3>Key Skills</h3>
+                <ul>
+                    <li>📊 Data Visualization (Power BI, Matplotlib, Seaborn)</li>
+                    <li>🐍 Python (Pandas, NumPy, Scikit-learn)</li>
+                    <li>💾 SQL & Database Management</li>
+                    <li>🐘 Hadoop</li> 
+                    <li>📈 R & Statistical Analysis</li>
+                    <li>🧠 Machine Learning & Predictive Modeling</li>
+                    <li><binary data, 1 bytes><binary data, 1 bytes><binary data, 1 bytes> DAX & Power Query (M)</li>
+                    <li>🔗 API Development (FastAPI) & Integration</li>
+                    <li><binary data, 1 bytes><binary data, 1 bytes><binary data, 1 bytes> Natural Language Processing (LLMs)</li>
+                    <li>💻 Web Technologies (HTML, CSS, React)</li> 
+                    <li>🗣️ Storytelling with Data</li>
+                    <li>☁️ Basic AWS Knowledge</li> 
+                </ul>
             </div>
         </div>
     </section>
+    <main id="main">
+        <h2 class="section-title" id="projects">Featured Work</h2>
+        
+        <div class="scroller-wrap" aria-label="Project cards scroller">
+            <ul class="scroller-inner">
+                <li>
+                    <article class="card" data-tilt data-project-id="uber"> 
+                        <img class="thumb" loading="lazy" src="images/Uber dashboard.jpg" alt="Uber Dashboard preview" />
+                        <div class="card-body">
+                            <h3>Uber Analysis Dashboard</h3>
+                            <p>An interactive dashboard analyzing Uber ride data, focusing on key metrics, ride trends, and revenue insights.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Data Analysis</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://app.powerbi.com/view?r=eyJrIjoiODY1Y2QyOGQtYjEzMi00ZjgxLThlZTAtYWFlYjE4NmE2NGE2IiwidCI6IjYwZWY3MWMwLTBlNWUtNDM1NS1iOTZlLWU0YzhhZGU0OGU0YSJ9" target="_blank" rel="noopener">Open Report</a>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="card" data-tilt data-project-id="writing">
+                        <img class="thumb" loading="lazy" src="images/Writing_Assistance_Project.jpg" alt="Context Aware Writing Assistance preview" />
+                        <div class="card-body">
+                            <h3>Context Aware Writing Assistance</h3>
+                            <p>Human AI system with eye tracking and knowledge graphs to deliver semantic writing support in real time. Built with React and FastAPI.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">LLM</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/Writing-Assistance" target="_blank" rel="noopener">Repository</a>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="card" data-tilt data-project-id="weather">
+                        <img class="thumb" loading="lazy" src="images/Weather.jpg" alt="Weather Analytics Dashboard preview" />
+                        <div class="card-body">
+                            <h3>Real Time Weather Dashboard</h3>
+                            <p>Power BI dashboard using WeatherAPI data: temperature, humidity, UV, precipitation, wind and DAX driven trends.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">API</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://app.powerbi.com/view?r=eyJrIjoiYTJkZjIwOTktN2E5Zi00ZDhlLWI5MWQtMWJlYmI5NmY5MzQzIiwidCI6IjYwZWY3MWMwLTBlNWUtNDM1NS1iOTZlLWU0YzhhZGU0OGU0YSJ9" target="_blank" rel="noopener">Open Report</a>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="card" data-tilt data-project-id="portfolio">
+                        <img class="thumb" loading="lazy" src="images/PORTFOILIO.jpg" alt="Portfolio Optimization GA preview" />
+                        <div class="card-body">
+                            <h3>Portfolio Optimization with GA</h3>
+                            <p>Genetic Algorithms in R to optimize asset weights and improve risk return trade offs. Benchmarked against random and equal weight portfolios.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">R</span><span class="tag">Genetic Algorithm</span><span class="tag">Finance</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/Portfolio-Optimization-" target="_blank" rel="noopener">Repository</a>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="card" data-tilt data-project-id="churn">
+                        <img class="thumb" loading="lazy" src="images/chrun predict.jpg" alt="Customer Churn Analytics dashboard preview" />
+                        <div class="card-body">
+                            <h3>Customer Churn Analytics</h3>
+                            <p>End to end churn prediction with SQL, Python and Power BI. Interactive KPIs highlight retention levers and risk segments.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Power BI</span>
+                        </p>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/customer-churn-analytics" target="_blank" rel="noopener">Repository</a>
+                        </div>
+                    </article>
+                </li>
 
+                <li aria-hidden="true">
+                    <article class="card" data-tilt data-project-id="uber"> 
+                        <img class="thumb" loading="lazy" src="images/Uber dashboard.jpg" alt="Uber Dashboard preview" />
+                        <div class="card-body">
+                            <h3>Uber Analysis Dashboard</h3>
+                            <p>An interactive dashboard analyzing Uber ride data, focusing on key metrics, ride trends, and revenue insights.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Data Analysis</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://app.powerbi.com/view?r=eyJrIjoiODY1Y2QyOGQtYjEzMi00ZjgxLThlZTAtYWFlYjE4NmE2NGE2IiwidCI6IjYwZWY3MWMwLTBlNWUtNDM1NS1iOTZlLWU0YzhhZGU0OGU0YSJ9" target="_blank" rel="noopener">Open Report</a>
+                        </div>
+                    </article>
+                </li>
+                <li aria-hidden="true">
+                    <article class="card" data-tilt data-project-id="writing">
+                        <img class="thumb" loading="lazy" src="images/Writing_Assistance_Project.jpg" alt="Context Aware Writing Assistance preview" />
+                        <div class="card-body">
+                            <h3>Context Aware Writing Assistance</h3>
+                            <p>Human AI system with eye tracking and knowledge graphs to deliver semantic writing support in real time. Built with React and FastAPI.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">LLM</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/Writing-Assistance" target="_blank" rel="noopener">Repository</a>
+                        </div>
+                    </article>
+                </li>
+                <li aria-hidden="true">
+                    <article class="card" data-tilt data-project-id="weather">
+                        <img class="thumb" loading="lazy" src="images/Weather.jpg" alt="Weather Analytics Dashboard preview" />
+                        <div class="card-body">
+                            <h3>Real Time Weather Dashboard</h3>
+                            <p>Power BI dashboard using WeatherAPI data: temperature, humidity, UV, precipitation, wind and DAX driven trends.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">API</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://app.powerbi.com/view?r=eyJrIjoiYTJkZjIwOTktN2E5Zi00ZDhlLWI5MWQtMWJlYmI5NmY5MzQzIiwidCI6IjYwZWY3MWMwLTBlNWUtNDM1NS1iOTZlLWU0YzhhZGU0OGU0YSJ9" target="_blank" rel="noopener">Open Report</a>
+                        </div>
+                    </article>
+                </li>
+                <li aria-hidden="true">
+                    <article class="card" data-tilt data-project-id="portfolio">
+                        <img class="thumb" loading="lazy" src="images/PORTFOILIO.jpg" alt="Portfolio Optimization GA preview" />
+                        <div class="card-body">
+                            <h3>Portfolio Optimization with GA</h3>
+                            <p>Genetic Algorithms in R to optimize asset weights and improve risk return trade offs. Benchmarked against random and equal weight portfolios.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">R</span><span class="tag">Genetic Algorithm</span><span class="tag">Finance</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/Portfolio-Optimization-" target="_blank" rel="noopener">Repository</a>
+                        </div>
+                    </article>
+                </li>
+                <li aria-hidden="true">
+                    <article class="card" data-tilt data-project-id="churn">
+                        <img class="thumb" loading="lazy" src="images/chrun predict.jpg" alt="Customer Churn Analytics dashboard preview" />
+                        <div class="card-body">
+                            <h3>Customer Churn Analytics</h3>
+                            <p>End to end churn prediction with SQL, Python and Power BI. Interactive KPIs highlight retention levers and risk segments.</p>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Power BI</span>
+                        </p>
+                        <div class="actions">
+                            <a class="btn btn-ghost magnet" href="https://github.com/Version1Venky/customer-churn-analytics" target="_blank" rel="noopener">Repository</a>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <div class="contact-container" id="contact"> 
+        <h4 class="call-to-action">Open to Data Analyst opportunities. Let's connect!</h4>
+        <section class="contact" aria-label="Contact">
+            <div class="block">
+                <h3>Location</h3>
+                <p>Glasgow, United Kingdom</p>
+            </div>
+            <div class="block">
+                <h3>Phone</h3>
+                <p><a href="tel:+447587749703" rel="noopener">+44 7587749703</a></p>
+            </div>
+            <div class="block">
+                <h3>Email</h3>
+                <p><a href="mailto:kardilevenkatesh@gmail.com" rel="noopener">kardilevenkatesh@gmail.com</a></p>
+            </div>
+            <div class="block">
+                <h3>Social</h3>
+                <div class="social-icons-group">
+                    <a href="https://www.linkedin.com/in/venkateshak1/" target="_blank" rel="noopener" aria-label="LinkedIn Profile">
+                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.146C0 .513.526 0 1.176 0h13.648c.65 0 1.176.513 1.176 1.146v13.708c0 .633-.526 1.146-1.176 1.146H1.176C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V9.17h-2.28c-.28 0-.41-.14-.41-.482V4.76h2.69v4.22h.02c.3-.46.54-1.12.54-1.92 0-1.84 1.25-2.7 2.34-2.7 1.37 0 2.27 1.14 2.27 3.5v4.22h2.69V8.78c0-2.36-1.46-3.48-3.46-3.48-1.55 0-2.58.85-3.05 1.6h-.02V4.76H4.943zM3.4 3.99c-.66 0-1.2.51-1.2 1.14 0 .63.54 1.14 1.2 1.14s1.2-.51 1.2-1.14c0-.63-.54-1.14-1.2-1.14z"/></svg>
+                    </a>
+                    <a href="https://github.com/Version1Venky" target="_blank" rel="noopener" aria-label="GitHub Profile">
+                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.51.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2.0-.21.15-.46.55-.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
     <div class="theme-toggle">
         <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">🌞 / 🌙</button>
     </div>
@@ -351,7 +596,6 @@
 
     <script>
         // --- FIX: DECLARE MISSING VARIABLE ---
-        // This function was likely missing in previous versions, causing the tilt cards to fail to reset.
         const relax = () => {}; 
         
         // --- 1. ABOUT ME DATA (FINAL VERSION) ---
@@ -373,48 +617,66 @@
             `
         };
 
-        // --- 1. PROJECT DATA (unchanged) ---
+        // --- 1. PROJECT DATA (Updated Descriptions) ---
         const projectData = {
+            uber: { 
+                title: "Uber Analysis Dashboard",
+                content: `
+                    <h4>Goals & Approach</h4>
+                    <p>This interactive dashboard provides a comprehensive analysis of Uber ride data using Power BI. Key metrics like completed bookings, revenue, and distance are visualized to track performance. Trends over time and revenue breakdown by vehicle type offer actionable business insights for operational improvements.</p>
+                    <h4>Technology Stack</h4>
+                    <p><strong>Power BI, DAX, Power Query (M Language)</strong></p>
+                    <h4>Impact & Features</h4>
+                    <p>Enables stakeholders to quickly identify revenue trends, optimize resource allocation based on demand hotspots (top pickup/drop locations), and monitor service quality through customer/driver ratings.</p>
+                    <ul>
+                        <li>KPI cards for quick performance overview.</li>
+                        <li>Monthly trend analysis for bookings and revenue.</li>
+                        <li>Revenue breakdown by vehicle type.</li>
+                        <li>Top pickup/drop location identification.</li>
+                        <li>Customer and driver rating analysis.</li>
+                    </ul>
+                `
+            }, 
             weather: {
                 title: "Real Time Weather Dashboard",
                 content: `
                     <h4>Goals & Approach</h4>
-                    <p>To showcase real-time API integration and advanced Power BI visualization techniques. The report features custom-calculated metrics for heat stress and wind chill, utilizing complex <strong>DAX</strong> logic to provide actionable insights into current and forecasted conditions.</p>
+                    <p>To showcase real-time API integration and advanced Power BI techniques. The report pulls live data from WeatherAPI and features custom DAX measures like heat stress and wind chill, providing more than just raw weather data.</p>
                     <h4>Technology Stack</h4>
                     <p><strong>Power BI, DAX, WeatherAPI, Power Query (M Language)</strong></p>
                     <h4>Impact</h4>
-                    <p>Demonstrates end-to-end data pipeline proficiency, from extraction and transformation to interactive dashboard deployment and advanced analytical measures.</p>
+                    <p>Demonstrates end-to-end data pipeline proficiency. The calculated metrics offer practical, actionable insights relevant for event planning, agriculture, or personal safety based on current and forecasted conditions.</p>
                 `
             },
             writing: {
                 title: "Context Aware Writing Assistance",
                 content: `
                     <h4>Goals & Approach</h4>
-                    <p>To build a functional prototype of a collaborative AI tool leveraging large language models (LLMs). The project uses a <strong>React frontend</strong> for the eye-tracking UI and a <strong>FastAPI backend</strong> to manage knowledge graphs and serve real-time semantic suggestions.</p>
+                    <p>Developed a functional prototype exploring Human-AI collaboration. The system leverages Large Language Models (LLMs) and eye-tracking via a React frontend, coupled with a FastAPI backend managing knowledge graphs, to provide real-time semantic suggestions during writing.</p>
                     <h4>Technology Stack</h4>
                     <p><strong>React/JavaScript, FastAPI/Python, LLM Prompting, Knowledge Graphs</strong></p>
-                    <h4>Result</h4>
-                    <p>Provides a robust framework for human-in-the-loop AI applications, proving full-stack development capability in data-driven systems.</p>
+                    <h4>Outcome</h4>
+                    <p>Successfully demonstrated a robust framework for human-in-the-loop AI applications, showcasing full-stack development capability and innovation in applying AI to enhance creative processes.</p>
                 `
             },
             portfolio: {
                 title: "Portfolio Optimization with GA",
                 content: `
                     <h4>Goals & Approach</h4>
-                    <p>To apply evolutionary computation to solve a complex financial problem. <strong>Genetic Algorithms (GA)</strong> in <strong>R</strong> were used to find the global optimum portfolio weights, achieving a superior Sharpe Ratio compared to traditional Mean-Variance Optimization.</p>
+                    <p>Applied advanced evolutionary computation (Genetic Algorithms) in R to solve the complex financial problem of portfolio optimization. The goal was to find optimal asset weights to maximize risk-adjusted returns (Sharpe Ratio).</p>
                     <h4>Methodology</h4>
-                    <p>Monte Carlo simulation, GA fitness function design, Time Series Analysis (R)</p>
+                    <p>Genetic Algorithm implementation, fitness function design based on Sharpe Ratio, benchmarking against traditional Mean-Variance Optimization and naive strategies (random/equal weight).</p>
                     <h4>Result</h4>
-                    <p>Demonstrated deep quantitative skills and the ability to apply advanced computational methods in finance for improved risk-return trade-offs.</p>
+                    <p>The GA approach achieved a superior Sharpe Ratio, demonstrating the potential of computational methods in finance to improve risk-return trade-offs beyond traditional techniques. Showcased deep quantitative and programming skills in R.</p>
                 `
             },
-            churn: {
+            churn: { // Description already focuses on impact, no major change needed
                 title: "Customer Churn Analytics",
                 content: `
                     <h4>Goals & Approach</h4>
-                    <p>To create a proactive system for reducing customer attrition. The project involved **SQL** for data cleaning and feature engineering, **Python (Scikit-learn)** for predictive modeling, and a **Power BI dashboard** to visualize high-risk segments and intervention strategies.</p>
+                    <p>To create a proactive system for reducing customer attrition. The project involved **SQL** for data cleaning and feature engineering, **Python (Scikit-learn)** for building a predictive churn model, and a **Power BI dashboard** to visualize high-risk segments and potential intervention strategies.</p>
                     <h4>Outcome & Accuracy</h4>
-                    <p>The model achieved **88% accuracy** in predicting churn risk. The Power BI dashboard provides marketing teams with clear, actionable insights into retention levers.</p>
+                    <p>The model achieved **88% accuracy** in predicting churn risk. The Power BI dashboard provides marketing teams with clear, actionable insights into retention levers, enabling targeted customer outreach.</p>
                     <h4>Technology Stack</h4>
                     <p><strong>SQL (for ETL), Python (Modeling), Power BI (Visualization)</strong></p>
                 `
@@ -426,14 +688,14 @@
         const modalTitle = document.getElementById('modalTitle');
         const modalBody = document.getElementById('modalBody');
         const modalClose = document.getElementById('modalClose');
-        const projectCards = document.querySelectorAll('.card[data-project-id]');
+        const projectCardsWithModal = document.querySelectorAll('.card[data-project-id]'); 
         const profilePhoto = document.getElementById('profilePhoto');
 
         function openModal(title, content) {
             modalTitle.textContent = title;
             modalBody.innerHTML = content;
             modal.classList.add('is-open');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeModal() {
@@ -442,11 +704,15 @@
         }
 
         // Project Card Click Listener
-        projectCards.forEach(card => {
+        projectCardsWithModal.forEach(card => { 
             card.addEventListener('click', (e) => {
                 if (e.target.closest('.actions a')) {
+                    return; 
+                }
+                if (e.target.closest('.modal-content')) {
                     return;
                 }
+                
                 const projectId = card.getAttribute('data-project-id');
                 const data = projectData[projectId];
                 if (data) {
@@ -520,8 +786,6 @@
         const tiltCards = document.querySelectorAll('[data-tilt]');
         tiltCards.forEach(card => {
             const maxTilt = 7; 
-            // const relax = () => card.style.transform = 'perspective(900px) rotateX(0) rotateY(0)'; 
-            // Note: I redefined 'relax' outside the tiltCards loop for the fix, but left the original code structure here.
             
             card.addEventListener('mousemove', e => {
                 const r = card.getBoundingClientRect();
@@ -535,18 +799,21 @@
             card.addEventListener('blur', relax, true);
         });
 
-        // Reveal on scroll (using Intersection Observer)
+        // --- 4. SCROLLER PAUSE ON CARD HOVER ---
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if(!prefersReduced && 'IntersectionObserver' in window){
-            const io = new IntersectionObserver((entries, obs)=>{
-                entries.forEach(ent=>{
-                    if(ent.isIntersecting){ ent.target.classList.add('reveal'); obs.unobserve(ent.target); }
+        const scrollerInner = document.querySelector('.scroller-inner');
+        
+        if (scrollerInner && !prefersReduced) { // Only run if not reduced motion
+            const scrollerCards = document.querySelectorAll('.scroller-inner .card');
+            scrollerCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    scrollerInner.classList.add('is-paused');
                 });
-            }, {threshold:.16, rootMargin:'0px 0px -8% 0px'});
-            document.querySelectorAll('.will-reveal').forEach(el=>io.observe(el));
-        } else {
-            document.querySelectorAll('.will-reveal').forEach(el=>el.classList.add('reveal'));
+                card.addEventListener('mouseleave', () => {
+                    scrollerInner.classList.remove('is-paused');
+                });
+            });
         }
     </script>
-</body>
+</body> 
 </html>
